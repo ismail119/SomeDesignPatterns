@@ -1,0 +1,84 @@
+namespace Patterns;
+
+//Write program for shopping coffe center , when you add some features cost will increase.
+
+public interface IAnyCoffee
+{
+    List<string> PrintContents();
+    int CalculateCost();
+}
+
+public class BasicCoffee : IAnyCoffee
+{
+    public List<string> contents { get; set; }
+    public int cost { get; set; } 
+    
+    public List<string> PrintContents()
+    {
+        contents = new List<string>();
+        
+        contents.Add("caffeine");
+        contents.Add("tannin");
+        contents.Add("fixed oil");
+        contents.Add("carbohydrates");
+        contents.Add("proteins");
+        return contents;
+    }
+
+    public int CalculateCost()
+    {
+        return 100;
+    }
+    
+}
+
+public class ChocolateCoffee: IAnyCoffee
+{
+    private IAnyCoffee targetCoffee;
+
+    public ChocolateCoffee(IAnyCoffee targetCoffee)
+    {
+        this.targetCoffee = targetCoffee;
+    }
+
+    public List<string> PrintContents()
+    {
+        var contents = targetCoffee.PrintContents();
+        contents.Add("Chocolate");
+        contents.Add("Foam");
+        return contents;
+    }
+
+    public int CalculateCost()
+    {
+        int currentCost = targetCoffee.CalculateCost();
+        return  currentCost + 150;
+    }
+}
+
+
+public class CaramelCoffee: IAnyCoffee
+{
+    private IAnyCoffee targetCoffee;
+
+    public CaramelCoffee(IAnyCoffee targetCoffee)
+    {
+        this.targetCoffee = targetCoffee;
+    }
+
+    public List<string> PrintContents()
+    {
+        var contents = targetCoffee.PrintContents();
+        contents.Add("Caramelle");
+        contents.Add("Foam");
+        return contents;
+    }
+
+    public int CalculateCost()
+    {
+        int currentCost = targetCoffee.CalculateCost();
+        return  currentCost + 150;
+    }
+}
+
+
