@@ -1,0 +1,80 @@
+public abstract class Size
+{
+    protected IProduct Iproduct;
+
+    protected Size(IProduct iproduct)
+    {
+        Iproduct = iproduct;
+    }
+
+    public abstract void Print();
+}
+
+public interface IProduct
+{
+    int FindCosts();
+}
+
+
+//Sizes
+public class BigSize: Size
+{
+    public override void Print()
+    {
+        Console.WriteLine("Big size "+ Iproduct.FindCosts());
+    }
+
+    public BigSize(IProduct iproduct) : base(iproduct)
+    {
+    }
+}
+
+public class MidSize: Size
+{
+    public override void Print()
+    {
+        Console.WriteLine("Mid Size" + Iproduct.FindCosts());
+    }
+
+    public MidSize(IProduct iproduct) : base(iproduct)
+    {
+    }
+}
+
+public class SmallSize: Size
+{
+    public override void Print()
+    {
+        Console.WriteLine("Small Size" + Iproduct.FindCosts());
+    }
+
+    public SmallSize(IProduct iproduct) : base(iproduct)
+    {
+    }
+}
+
+//Products
+
+public class Book: IProduct
+{
+    public int FindCosts()
+    {
+        return 200;
+    }
+}
+
+public class Documentation: IProduct
+{
+    public int FindCosts()
+    {
+        return 300;
+    }
+}
+
+public class Albums: IProduct
+{
+    public int FindCosts()
+    {
+        return 400;
+    }
+}
