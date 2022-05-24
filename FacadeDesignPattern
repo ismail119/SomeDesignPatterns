@@ -1,0 +1,31 @@
+public class Facade
+{
+    public Stack stack=new ();
+    public Queue queue=new ();
+    public LinkedList LinkedList=new();
+}
+
+public class Stack
+{
+    //You can make better constructor methods here.
+    public string StackOperation()
+    {
+        return "This is a one of the stack structures";
+    }
+}
+
+public class Queue
+{
+    public string QueueOperation()
+    {
+        return "This is a one of the Queue structures";
+    }
+}
+
+public class LinkedList
+{
+    public string LinkedListOperation()
+    {
+        return "This is a one of the LinkedList structures";
+    }
+}
