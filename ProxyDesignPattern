@@ -1,0 +1,81 @@
+public abstract class Database
+{
+    protected Dictionary<string, string> accounts =new()
+    {
+        {"ismail","1234"},
+        {"ahmet","merhaba"}
+    };
+
+    public abstract void SignIn(string name,string password);
+    public abstract void SendMessage(string message, string targetPersonName);
+    
+}
+
+public class Proxy: Database
+{
+
+    private static Proxy instance;
+
+    public static Proxy Instance
+    {
+        get
+        {
+            if (instance==null)
+            {
+                instance = new Proxy();
+            }
+
+            return instance;
+        }
+    }
+        
+        
+    private bool loggedIn = false;
+    
+    
+    void Check(string name, string password)
+    {
+        foreach (var key in accounts.Keys)
+        {
+            if (key==name)
+            {
+                if (accounts[key]==password)
+                {
+                    loggedIn = true;
+                    return;
+                }
+            }
+        }
+    }
+
+    public override void SignIn(string name,string password)
+    {
+        Check(name,password);
+        if (loggedIn)
+        {
+            Console.Write("Yes You are in your account");
+            return;
+        }
+        else
+        {
+            Console.WriteLine("Your name or password is wrong");
+        }
+    }
+
+    public override void SendMessage(string message, string targetPersonName)
+    {
+        if (loggedIn)
+        {
+            Console.WriteLine("I sent your :"+message+" message to "+ targetPersonName);
+            return;
+        }
+        Console.WriteLine("Please first of all, sign In with Sign in function");
+        
+    }
+    
+}
+
+public class Client
+{
+    public Proxy _proxy = Proxy.Instance;
+}
