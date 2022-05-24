@@ -1,0 +1,34 @@
+public interface Ship
+{
+    string PrintRanges();
+}
+public class NormalShip: Ship
+{
+    public string PrintRanges()
+    {
+        return "This ship has 2000km to reach new land!";
+    }
+}
+
+public class WarShip
+{
+    public string PrintMyEnemyRanges()
+    {
+        return "This Ship Has 500 Km to reach enemies!";
+    }
+}
+
+public class WarShipAdapterToShip : Ship
+{
+    private WarShip _warShip;
+
+    public WarShipAdapterToShip(WarShip warShip)
+    {
+        _warShip = warShip;
+    }
+
+    public string PrintRanges()
+    {
+        return _warShip.PrintMyEnemyRanges();
+    }
+} 
