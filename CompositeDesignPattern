@@ -1,0 +1,64 @@
+public interface IEklenecekler
+{
+    string name { get; set; }
+    int totalCost { get; set; }
+    int thisCost { get; set; }
+    void SepeteEkle();
+    void ToplamFiyatiBastir();
+    
+}
+
+
+//Composite
+public class Paket: IEklenecekler
+{
+    
+    private List<IEklenecekler> urunlerListesi;
+    public string name { get; set; }
+    public int totalCost { get; set; }
+    public int thisCost { get; set; }
+
+    public Paket(string name)
+    {
+        this.name = name;
+        urunlerListesi = new List<IEklenecekler>();
+    }
+
+    public void AddProduct(IEklenecekler urun)
+    {
+        urunlerListesi.Add(urun);
+    }
+
+    public void SepeteEkle()
+    {
+        foreach (var urun in urunlerListesi)
+        {
+            thisCost += urun.thisCost;
+        }
+
+        totalCost += thisCost;
+    }
+
+    public void ToplamFiyatiBastir()
+    {
+        Console.WriteLine(totalCost);
+    }
+}
+
+
+//Leafs
+public class Urun: IEklenecekler
+{
+    public string name { get; set; }
+    public int totalCost { get; set; }
+    public int thisCost { get; set; } = 10;
+
+    public void SepeteEkle()
+    {
+        totalCost += thisCost;
+    }
+
+    public void ToplamFiyatiBastir()
+    {
+        Console.WriteLine(totalCost);
+    }
