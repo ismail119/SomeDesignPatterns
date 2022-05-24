@@ -1,0 +1,29 @@
+public class Singleton
+{
+    private static Singleton instance;
+    public int age;
+    public string name;
+
+    public static Singleton Instance
+    {
+        get
+        {
+            if (instance==null)
+            {
+                instance = new Singleton();
+            }
+
+            return instance;
+        }
+    }
+}
+public static class Main{
+  public static void main(string[] args){
+  
+     var _instance = Singleton.Instance;
+     _instance.age=5;
+     var _instance2 = Singleton.Instance;
+     Console.Log(_instance2.age) #Returns 5
+     
+  }
+}
